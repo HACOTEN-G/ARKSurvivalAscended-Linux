@@ -103,19 +103,6 @@ sudo -u steam tar -x -C "$STEAMDIR/compatibilitytools.d/" -f "/opt/game-resource
 [ -d "$STEAMAPPSDIR/compatdata/2430930" ] || \
   sudo -u steam cp "$STEAMDIR/compatibilitytools.d/$PROTON_NAME/files/share/default_pfx" "$STEAMAPPSDIR/compatdata/2430930" -r
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-
-XAUDIO_SRC="$SCRIPT_DIR/xaudio2_9.dll"
-XAUDIO_DST="$STEAMAPPSDIR/common/ARK Survival Ascended Dedicated Server/ShooterGame/Binaries/Win64/xaudio2_9.dll"
-
-if [ ! -f "$XAUDIO_SRC" ]; then
-  echo "xaudio2_9.dll not found next to install script" >&2
-  exit 1
-fi
-
-sudo -u steam cp "$XAUDIO_SRC" "$XAUDIO_DST"
-sudo -u steam chmod 644 "$XAUDIO_DST"
-
 # Install the systemd service file for ARK Survival Ascended Dedicated Server (Island)
 cat > /etc/systemd/system/ark-island.service <<EOF
 [Unit]
@@ -138,6 +125,19 @@ RestartSec=20s
 [Install]
 WantedBy=multi-user.target
 EOF
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+XAUDIO_SRC="$SCRIPT_DIR/xaudio2_9.dll"
+XAUDIO_DST="$STEAMAPPSDIR/common/ARK Survival Ascended Dedicated Server/ShooterGame/Binaries/Win64/xaudio2_9.dll"
+
+if [ ! -f "$XAUDIO_SRC" ]; then
+  echo "xaudio2_9.dll not found next to install script" >&2
+  exit 1
+fi
+
+sudo -u steam cp "$XAUDIO_SRC" "$XAUDIO_DST"
+sudo -u steam chmod 644 "$XAUDIO_DST"
 
 systemctl daemon-reload
 systemctl enable ark-island
