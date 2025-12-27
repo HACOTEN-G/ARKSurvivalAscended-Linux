@@ -111,3 +111,6 @@ Edit crontab `sudo nano /etc/crontab` and add:
 ```
 
 (0 is minute, 5 is hour in 24-hour notation, followed by '* * *' for every day, every month, every weekday)
+
+(2025/12/27 by HACOTEN) 
+I fixed it so that there are no errors by copying xaudio2_9.dll in the script.
