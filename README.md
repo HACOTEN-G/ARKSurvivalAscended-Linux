@@ -1,8 +1,5 @@
-# ARKSurvivalAscended-Linux
-ARKSurvivalAscended-Linux-sever-pgm
-
-
 # Tools for managing ARK Survival Ascended on Linux
+This script is a copy.
 
 ## What does it do?
 
